@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Pegawai;
+use App\Models\Mahasiswa;
 
-class PegawaiController extends Controller
+class MahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data=Pegawai::get();
-        return view('pegawai.index', compact('data'));
+        $data=Mahasiswa::get();
+        return view('mahasiswa.index', compact('data'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view(view: 'pegawai.create');
+        return view(view: 'mahasiswa.create');
     }
 
     /**
@@ -29,8 +29,8 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        Pegawai::create($request->all());
-        return redirect()->route('pegawai.index')->with('sukses', 'data berhasil ditambahkan');
+        Mahasiswa::create($request->all());
+        return redirect()->route('mahasiswa.index')->with('sukses', 'data berhasil ditambahkan');
     }
 
     /**
@@ -38,8 +38,8 @@ class PegawaiController extends Controller
      */
     public function show(string $id)
     {
-        $data = Pegawai::where('id',$id)->first();
-        return view('pegawai.detail',compact('data'));
+        $data = Mahasiswa::where('id',$id)->first();
+        return view('mahasiswa.detail',compact('data'));
     }
 
     /**
@@ -47,8 +47,8 @@ class PegawaiController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Pegawai::findOrFail($id);
-        return view('pegawai.edit', compact('data'));
+        $data = Mahasiswa::findOrFail($id);
+        return view('mahasiswa.edit', compact('data'));
     }
 
     /**
@@ -56,13 +56,12 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-        Pegawai::where('id', $id)->update([
+        Mahasiswa::where('id', $id)->update([
             'name' => $request->name,
             'nip' => $request->nip,
         ]);
 
-        return redirect()->route('pegawai.index')->with('success', 'Data berhasil diupdate');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -71,9 +70,9 @@ class PegawaiController extends Controller
     public function destroy(string $id)
     {
         // Cari data berdasarkan ID, jika tidak ditemukan akan error 404
-        Pegawai::findOrFail($id)->delete();
+        Mahasiswa::findOrFail($id)->delete();
     
         // Redirect dengan pesan sukses
-        return redirect()->route('pegawai.index')->with('sukses', 'Data berhasil dihapus');
+        return redirect()->route('mahasiswa.index')->with('sukses', 'Data berhasil dihapus');
     }
 }
