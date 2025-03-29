@@ -13,7 +13,7 @@ class PegawaiController extends Controller
     public function index()
     {
         $data=Pegawai::get();
-        return view('index', compact('data'));
+        return view('pegawai.index', compact('data'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('pegawai.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class PegawaiController extends Controller
     public function show(string $id)
     {
         $data = Pegawai::where('id',$id)->first();
-        return view('detail',compact('data'));
+        return view('pegawai.detail',compact('data'));
     }
 
     /**
@@ -48,7 +48,7 @@ class PegawaiController extends Controller
     public function edit(string $id)
     {
         $data = Pegawai::findOrFail($id);
-        return view('edit', compact('data'));
+        return view('pegawai.edit', compact('data'));
     }
 
     /**
