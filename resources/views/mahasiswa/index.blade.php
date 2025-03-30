@@ -1,56 +1,46 @@
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Utama</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Selamat Datang di Website Saya</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Beranda</a></li>
-                <li><a href="#">Tentang</a></li>
-                <li><a href="#">Kontak</a></li>
-                <li><a href="mahasiswa/create">+ Tambah Mahasiswa</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section>
-            <h2>Biodata</h2>
-                <table border="1" cellpadding="10">
+@extends('layouts.app')
+
+@section('title', 'Data Mahasiswa')
+
+@section('content')
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Manajemen Data Mahasiswa</h1>
+        <p>Kelola data Mahasiswa dengan mudah dan efisien.</p>
+        <a href="{{ route('mahasiswa.create') }}" class="btn">+ Tambah Mahasiswa</a>
+    </div>
+</section>
+<!-- Kontainer Data mahasiswa -->
+<div class="container">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>NIP</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($data as $mahasiswa)
                     <tr>
-                        <th>Nama</th>
-                        <th>NIM</th>
-                        <th>Prodi</th>
-                        <th>Aksi</th>
-                    </tr>
-                    @foreach ($data as $mhs)
-                    <tr>
-                        <td>{{ $mhs->name }}</td>
-                        <td>{{ $mhs->nim }}</td>
-                        <td>{{ $mhs->prodi }}</td>
-                        <td>
-                            <a href="{{ route('mahasiswa.show', $mhs->id) }}">Show</a>
-                            <a href="{{ route('mahasiswa.edit', $mhs->id) }}">Edit</a>
-                            <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id) }}" style="display:inline" 
-                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                @csrf 
+                        <td>{{ $mahasiswa->name }}</td>
+                        <td>{{ $mahasiswa->nim }}</td>
+                        <td>{{ $mahasiswa->prodi }}</td>
+                        <td class="action-buttons">
+                            <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}" class="btn">Lihat</a>
+                            <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="btn btn-edit">Edit</a>
+                            <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST" class="delete-form" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                @csrf
                                 @method('DELETE')
-                                <button type="submit">Hapus</button>
+                                <button type="submit" class="btn btn-delete">Hapus</button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
-                </table>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 Delas Princia Hakim. Semua Hak Cipta Dilindungi.</p>
-    </footer>
-</body>
-</html>
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

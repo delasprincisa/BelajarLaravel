@@ -58,7 +58,8 @@ class MahasiswaController extends Controller
     {
         Mahasiswa::where('id', $id)->update([
             'name' => $request->name,
-            'nip' => $request->nip,
+            'nim' => $request->nim,
+            'prodi' => $request->prodi,
         ]);
 
         return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diupdate');

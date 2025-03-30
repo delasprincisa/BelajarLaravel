@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>@yield('title', 'Sistem Informasi')</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    <header>
+<header>
         <div class="header-logo">Belajar Laravel</div>
         <nav class="navbar">
             <a href="#">Beranda</a>
@@ -15,18 +15,9 @@
             <a href="#">Kontak</a>
         </nav>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Bangun Aplikasi Web dengan Laravel</h1>
-            <p>Pelajari Laravel dengan mudah dan mulai kembangkan proyek web impianmu.</p>
-            <div class="hero-buttons">
-                <a href="{{ url('/pegawai') }}" class="btn">Halaman Pegawai</a>
-                <a href="{{ url('/mahasiswa') }}" class="btn ">Halaman Mahasiswa</a>
-            </div>
-        </div>
-    </section>
+    <div class="content">
+        @yield('content')
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -45,4 +36,5 @@
             </div>
         </div>
     </footer>
-</body
+</body>
+</html>
